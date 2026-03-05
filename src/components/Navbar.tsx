@@ -1,19 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
-  const [token, setToken] = useState<string | null | undefined>(undefined);
-
-  useEffect(() => {
-    setToken(localStorage.getItem("token") || null);
-  }, []);
-
-  if (token === undefined) return null; // wait for token
+  const { token, setToken } = useAuth();
 
   const logout = () => {
-    localStorage.removeItem("token");
+    setToken(null);
     window.location.href = "/login";
   };
 
