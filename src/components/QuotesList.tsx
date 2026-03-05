@@ -11,15 +11,19 @@ interface Quote {
 export default function QuotesList() {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [error, setError] = useState("");
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null | undefined>(undefined);
   const [loading, setLoading] = useState(true);
 
+  // Load token first
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     setToken(storedToken);
   }, []);
 
+  // Fetch quotes only AFTER token exists
   useEffect(() => {
+    if (token === undefined) return; // still checking localStorage
+
     if (!token) {
       setLoading(false);
       return;
@@ -50,6 +54,9 @@ export default function QuotesList() {
 
     fetchQuotes();
   }, [token]);
+
+  // Wait until token is loaded
+  if (token === undefined) return null;
 
   return (
     <div className="max-w-md mx-auto mt-10 p-4 bg-white rounded shadow">
