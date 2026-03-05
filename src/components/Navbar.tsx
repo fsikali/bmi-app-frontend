@@ -1,20 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
-  const [token, setToken] = useState<string | null>(null);
-
-  useEffect(() => {
-    setToken(localStorage.getItem("token"));
-  }, []);
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
-    window.location.href = "/login";
-  };
+  const { token, logout } = useAuth();
 
   return (
     <nav className="bg-blue-600 text-white px-6 py-4 flex justify-between items-center">
