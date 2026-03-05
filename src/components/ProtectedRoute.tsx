@@ -5,18 +5,17 @@ import { useRouter } from "next/navigation";
 
 export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const [hydrated, setHydrated] = useState(false);
+  const [loading, setLoading] = useState(true); // show loading while checking token
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-
     if (!token) {
-      router.push("/login"); // redirect to login if not logged in
+      router.push("/login"); // redirect if not logged in
     } else {
-      setHydrated(true);
+      setLoading(false); // allow content to render
     }
   }, [router]);
 
-  if (!hydrated) return null; // wait for client
+  if (loading) return <p className="text-center mt-10">Loading...</p>;
   return <>{children}</>;
 }
