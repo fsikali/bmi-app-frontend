@@ -12,13 +12,13 @@ export default function Home() {
       <div className="flex space-x-4 justify-center">
         <a
           href="/signup"
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition font-semibold"
+          className="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition font-semibold"
         >
           Sign Up
         </a>
         <a
           href="/login"
-          className="bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-lg shadow-md hover:bg-blue-50 transition font-semibold"
+          className="bg-white border border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg shadow-md hover:bg-indigo-50 transition font-semibold"
         >
           Login
         </a>

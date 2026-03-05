@@ -50,7 +50,7 @@ export default function SignupForm() {
         <p className="mb-4">Your account has been created. Please login to continue.</p>
         <button
           onClick={() => router.push("/login")}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           Go to Login
         </button>
