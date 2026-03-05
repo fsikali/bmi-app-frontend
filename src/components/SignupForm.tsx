@@ -50,7 +50,7 @@ export default function SignupForm() {
         <p className="mb-4">Your account has been created. Please login to continue.</p>
         <button
           onClick={() => router.push("/login")}
-          className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           Go to Login
         </button>
@@ -85,7 +85,7 @@ export default function SignupForm() {
       <button
         onClick={handleSignup}
         disabled={loading}
-        className="bg-green-500 text-white px-4 py-2 rounded-md w-full hover:bg-green-600 transition disabled:opacity-50"
+        className="bg-indigo-600 text-white px-4 py-2 rounded-md w-full hover:bg-green-600 transition disabled:opacity-50"
       >
         {loading ? "Signing up..." : "Sign Up"}
       </button>
