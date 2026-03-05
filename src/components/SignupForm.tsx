@@ -9,6 +9,7 @@ export default function SignupForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false); // <-- loading
   const router = useRouter();
 
   const handleSignup = async () => {
@@ -20,6 +21,7 @@ export default function SignupForm() {
       return;
     }
 
+    setLoading(true); // start loading
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/signup`, {
         method: "POST",
@@ -36,6 +38,8 @@ export default function SignupForm() {
       setTimeout(() => router.push("/login"), 1500);
     } catch (err: any) {
       setError(err.message);
+    } finally {
+      setLoading(false); // stop loading
     }
   };
 
@@ -65,9 +69,12 @@ export default function SignupForm() {
       />
       <button
         onClick={handleSignup}
-        className="bg-green-600 text-white px-4 py-2 rounded w-full hover:bg-green-700"
+        disabled={loading} // disable while loading
+        className={`w-full px-4 py-2 rounded text-white ${
+          loading ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"
+        }`}
       >
-        Sign Up
+        {loading ? "Creating account..." : "Sign Up"}
       </button>
       {error && <p className="mt-3 text-red-500">{error}</p>}
       {success && <p className="mt-3 text-green-500">{success}</p>}
