@@ -17,7 +17,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="shrink-0">
             <Link href="/" className="text-2xl font-bold text-indigo-600 hover:text-indigo-500">
-              FS BMI
+              FS
             </Link>
           </div>
 
