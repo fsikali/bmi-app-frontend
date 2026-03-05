@@ -80,7 +80,7 @@ export default function SignupForm() {
       <button
         onClick={handleSignup}
         disabled={loading}
-        className="bg-green-600 text-white px-4 py-2 rounded w-full hover:bg-green-700"
+        className="bg-green-500 text-white px-4 py-2 rounded-md w-full hover:bg-green-600 transition disabled:opacity-50"
       >
         {loading ? "Signing up..." : "Sign Up"}
       </button>
