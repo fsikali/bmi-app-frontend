@@ -1,12 +1,28 @@
+"use client";
+
 export default function Home() {
   return (
-    <div className="text-center mt-20">
-      <h1 className="text-4xl font-bold text-gray-800">
-        Welcome to My App
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex flex-col items-center justify-center text-center px-4">
+      <h1 className="text-5xl md:text-6xl font-bold text-blue-600 mb-4 animate-fadeIn">
+        Welcome to FS App
       </h1>
-      <p className="mt-4 text-gray-600">
-        Login to access BMI Calculator and Quotes.
+      <p className="text-gray-700 text-lg md:text-xl mb-8 animate-fadeIn delay-150">
+        Your personal BMI calculator and motivational quotes all in one place.
       </p>
+      <div className="flex space-x-4 justify-center">
+        <a
+          href="/signup"
+          className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition font-semibold"
+        >
+          Sign Up
+        </a>
+        <a
+          href="/login"
+          className="bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-lg shadow-md hover:bg-blue-50 transition font-semibold"
+        >
+          Login
+        </a>
+      </div>
     </div>
   );
 }
