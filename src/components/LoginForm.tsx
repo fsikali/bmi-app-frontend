@@ -19,12 +19,12 @@ export default function LoginForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
       const data = await res.json();
+
       if (!res.ok) throw new Error(data.error || "Login failed");
 
-      setToken(data.token);  // <-- update navbar instantly
-      router.push("/");       // redirect to home
+      setToken(data.token);
+      router.push("/");
     } catch (err: any) {
       setError(err.message);
     }

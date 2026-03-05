@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
@@ -11,7 +10,6 @@ export default function SignupForm() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const router = useRouter();
-  const { setToken } = useAuth();
 
   const handleSignup = async () => {
     setError("");
@@ -30,12 +28,12 @@ export default function SignupForm() {
       });
 
       const data = await res.json();
+
       if (!res.ok) throw new Error(data.error || "Signup failed");
 
-      // Automatically log in after signup
-      setToken(data.token || null);  
-      setSuccess("Account created! Redirecting...");
-      setTimeout(() => router.push("/"), 1000);
+      setSuccess("Account created! Please log in.");
+      setEmail(""); setPassword(""); setConfirmPassword("");
+      setTimeout(() => router.push("/login"), 1500);
     } catch (err: any) {
       setError(err.message);
     }
@@ -44,10 +42,33 @@ export default function SignupForm() {
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow">
       <h1 className="text-2xl font-bold mb-4">Sign Up</h1>
-      <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} className="border p-2 w-full mb-3 rounded" />
-      <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} className="border p-2 w-full mb-3 rounded" />
-      <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className="border p-2 w-full mb-3 rounded" />
-      <button onClick={handleSignup} className="bg-green-600 text-white px-4 py-2 rounded w-full hover:bg-green-700">Sign Up</button>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="border p-2 w-full mb-3 rounded"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="border p-2 w-full mb-3 rounded"
+      />
+      <input
+        type="password"
+        placeholder="Confirm Password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        className="border p-2 w-full mb-3 rounded"
+      />
+      <button
+        onClick={handleSignup}
+        className="bg-green-600 text-white px-4 py-2 rounded w-full hover:bg-green-700"
+      >
+        Sign Up
+      </button>
       {error && <p className="mt-3 text-red-500">{error}</p>}
       {success && <p className="mt-3 text-green-500">{success}</p>}
     </div>
