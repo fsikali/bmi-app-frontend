@@ -4,15 +4,13 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function Navbar() {
-  const [token, setToken] = useState<string | null>(null);
-  const [hydrated, setHydrated] = useState(false);
+  const [token, setToken] = useState<string | null | undefined>(undefined);
 
   useEffect(() => {
-    setToken(localStorage.getItem("token"));
-    setHydrated(true);
+    setToken(localStorage.getItem("token") || null);
   }, []);
 
-  if (!hydrated) return null; // wait until we read localStorage
+  if (token === undefined) return null; // wait for token
 
   const logout = () => {
     localStorage.removeItem("token");

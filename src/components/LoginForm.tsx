@@ -7,10 +7,12 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleLogin = async () => {
     setError("");
+    setLoading(true);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
         method: "POST",
@@ -19,15 +21,14 @@ export default function LoginForm() {
       });
 
       const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Login failed");
-      }
+      if (!res.ok) throw new Error(data.error || "Login failed");
 
       localStorage.setItem("token", data.token);
       router.push("/"); // redirect to home
     } catch (err: any) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,7 +53,7 @@ export default function LoginForm() {
         onClick={handleLogin}
         className="bg-blue-600 text-white px-4 py-2 rounded w-full hover:bg-blue-700"
       >
-        Login
+        {loading ? "Logging in..." : "Login"}
       </button>
       {error && <p className="mt-3 text-red-500">{error}</p>}
     </div>
