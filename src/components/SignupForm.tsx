@@ -18,6 +18,11 @@ export default function SignupForm() {
       setError("Passwords do not match");
       return;
     }
+// no length restriction here
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters");
+      return;
+    }
 
     setLoading(true);
     try {

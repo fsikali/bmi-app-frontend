@@ -16,6 +16,10 @@ export default function LoginForm() {
     setError("");
     setLoading(true);
 
+    if(!password) {
+      alert("Enter password");
+    }
+
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
         method: "POST",
@@ -33,6 +37,11 @@ export default function LoginForm() {
     } finally {
       setLoading(false);
     }
+
+    if (!email || !password) {
+  setError("Email and password required");
+  return;
+}
   };
 
   return (
